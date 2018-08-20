@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Image, Text, TouchableOpacity, ScrollView } from 'react-native';
 
 export default class HomeScreen extends Component {
   static navigationOptions = {
@@ -18,7 +18,7 @@ export default class HomeScreen extends Component {
   }
 
     componentDidMount () {
-      fetch('https://api.unsplash.com/photos/random?count=2&client_id=ab3411e4ac868c2646c0ed488dfd919ef612b04c264f3374c97fff98ed253dc9')
+      fetch('https://api.unsplash.com/photos/random?client_id=ab3411e4ac868c2646c0ed488dfd919ef612b04c264f3374c97fff98ed253dc9')
       .then((response) => response.json() )
       .then((responseJson) => {
         this.setState({
@@ -43,6 +43,7 @@ export default class HomeScreen extends Component {
         alignItems: 'center',
         backgroundColor: '#99ccff',
       }}>
+        <ScrollView>
           <Text style={styles.item}>photoID: {this.state.namePhoto}</Text>
           <Text style={styles.item}>author: {this.state.author}</Text>
           <TouchableOpacity onPress={() =>
@@ -56,6 +57,7 @@ export default class HomeScreen extends Component {
             source={{ uri: this.state.photo}}
             />
           </TouchableOpacity>
+        </ScrollView>
       </View>
     )
   }
